@@ -2,17 +2,37 @@ package main;
 
 public class Main {
 	public static void main(String[] args) {
-		int[] array = {1,2,3,4,5,6,7,8,9};
+		int[] array = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+		System.out.println("TESTES: BUSCA BINÁRIA");
 		
-		if (buscaBinaria(4, array, 0, array.length))
-			System.out.println("Está presente!");
-		else
-			System.out.println("Não está presente!");
-		
+		System.out.println(formataSaida(4, (buscaBinaria(4, array, 0, array.length - 1))));
+		System.out.println(formataSaida(14, (buscaBinaria(14, array, 0, array.length - 1))));
+		System.out.println(formataSaida(0, (buscaBinaria(0, array, 0, array.length - 1))));
+		System.out.println(formataSaida(-4, (buscaBinaria(-4, array, 0, array.length - 1))));
 	}
-	
+
+	public static String formataSaida(int valor, boolean estaPresente) {
+
+		if (estaPresente)
+			return "O valor " + valor + " está presente do array";
+		else
+			return "O valor " + valor + " não está presente do array";
+
+	}
+
 	public static boolean buscaBinaria(int valor, int[] array, int leftIndex, int rightIndex) {
-		return true;
+		int middle = (rightIndex + leftIndex) / 2;
+
+		if (leftIndex > rightIndex)
+			return false;
+		if (valor == array[middle])
+			return true;
+
+		if (valor < array[middle])
+			return buscaBinaria(valor, array, leftIndex, middle - 1);
+		else
+			return buscaBinaria(valor, array, middle + 1, rightIndex);
 	}
 
 }
